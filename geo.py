@@ -190,7 +190,7 @@ class Iterator(object):
     def update(self):
         raise NotImplementedError
     
-    def checkConversion(self, diff):
+    def check_conversion(self, diff):
         if diff < self.CONVERSION_CRITERIA :
             self.isConverged = True
         
@@ -246,7 +246,7 @@ class ThetaIter(Iterator):
         G = coef1_G + coef2_G + coef3_G
         
         theta -= F/(1.-G)
-        self.checkConversion( abs(F) )
+        self.check_conversion( abs(F) )
         
         self.theta, self.F, self.J, self.K = theta, F, J, K
         self.sigma, self.gamma, self.Gamma = sigma, gamma, Gamma
@@ -266,7 +266,7 @@ class GammaIter(Iterator):
         Gamma = 1. - gamma**2.
         D = c.f/4. * ( 1.+c.f - 3./4. * c.f*Gamma )
         gamma_new = p.q / ( 1. - D*Gamma )
-        self.checkConversion( abs( gamma_new - gamma ) )
+        self.check_conversion( abs( gamma_new - gamma ) )
         self.gamma, self.Gamma, self.D = gamma_new, Gamma, D
 
 
